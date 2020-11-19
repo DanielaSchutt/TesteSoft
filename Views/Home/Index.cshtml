@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TesteSoftDesign.ViewModels.BookViewModel>
+
+<div class="jumbotron">
+    <h1>Livros</h1>
+</div>
+<div class="row">
+
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
+                    <p class="card-text"> Autor: @Html.DisplayFor(modelItem => item.AuthorName)</p>
+                    <p class="card-text text-muted">@Html.DisplayFor(modelItem => item.Pages) páginas</p>
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#rentModal"  @((item.IsRented) ? "disabled" : "")>Alugar</button>
+                    @Html.ActionLink("Ver mais", "Details", "Book", new { id = item.Id }, new { @class = "btn btn-primary", @role = "button" })
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="rentModalLabel">Alugar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            Você deverá devolver esse livro até o dia @DateTime.Now.AddDays(15).ToString("dd/MM/yyyy")
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Put", "Book", new { id = item.Id})'">Ok</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

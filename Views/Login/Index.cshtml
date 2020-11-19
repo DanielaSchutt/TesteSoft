@@ -1,0 +1,38 @@
+﻿@model TesteSoftDesign.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "Login";
+}
+<h2>Login</h2>
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    if (@ViewBag.Message != null)
+    {
+        <div style="border:1px solid red">
+            @ViewBag.Message
+        </div>
+    }
+    <form>
+        <div>
+            <label>@Html.LabelFor(a => a.Username)</label>
+            <div class="form-group">@Html.TextBoxFor(a => a.Username)</div>
+            <div>@Html.ValidationMessageFor(a => a.Username)</div>
+        </div>
+        <div>
+            <label> @Html.LabelFor(a => a.Password)</label>
+            <div class="form-group"> @Html.PasswordFor(a => a.Password) </div>
+            <div> @Html.ValidationMessageFor(a => a.Password) </div>
+        </div>
+        <div>
+
+            <div>
+                <input class="btn btn-info" type="submit" value="Login" />
+            </div>
+
+        </div>
+    </form>
+}
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,22 @@
+﻿@model TesteSoftDesign.ViewModels.BookViewModel
+
+@{
+    ViewBag.Title = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h2> @Html.DisplayName(Model.Name)</h2>
+    <div class="col-md-6">
+        <p>Autor:  @Html.DisplayName(Model.AuthorName)</p>
+        <p>Páginas:  @Html.DisplayName(Model.Pages.ToString())</p>
+        <p>Está alugado:  @Html.DisplayName((Model.IsRented)? "Sim" : "Não")</p>
+    </div>
+
+</div>
+
+
+
+<div>
+    @Html.ActionLink("Voltar", "Index", "Home")
+</div>
